@@ -1,0 +1,36 @@
+FROM ruby:2.3.7-alpine
+
+LABEL maintainer="Randy Girard <rgirard59@yahoo.com>"
+
+ARG POSTGRES_USERNAME
+ARG POSTGRES_PASSWORD
+ARG POSTGRES_HOST
+ARG POSTGRES_PORT
+ARG POSTGRES_DBNAME
+
+ENV RAILS_ENV production
+ENV WORKPLACE /usr/lib/app_perf
+ENV PORT 5000
+
+WORKDIR $WORKPLACE
+
+COPY app/ app/
+COPY bin/ bin/
+COPY config/ config/
+COPY db/ db/
+COPY lib/ lib/
+COPY public/ public/
+COPY config.ru config.ru
+COPY Rakefile Rakefile
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
+
+RUN apk update
+RUN apk --no-cache add build-base linux-headers git postgresql-dev nodejs tzdata
+# RUN apk --no-cache add --virtual build-dependencies
+# RUN apk del build-dependencies
+
+RUN bundle install --binstubs --deployment --with=production --jobs `expr $(cat /proc/cpuinfo | grep -c "cpu cores") - 1` --retry 3
+RUN bin/rake assets:precompile
+
+EXPOSE $PORT

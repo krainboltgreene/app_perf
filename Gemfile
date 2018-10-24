@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.3.7'
 
 gem 'dotenv-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -19,8 +20,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -31,7 +31,6 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'unicorn'
 gem 'foreman'
 # gem 'puma'
-gem 'passenger'
 gem 'kaminari'
 gem "groupdate"
 gem 'calculate-all'
@@ -57,6 +56,7 @@ gem 'vanilla-ujs'
 gem 'oj'
 gem 'roda'
 gem 'pluck_to_hash'
+gem 'pry'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -66,8 +66,6 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'sqlite3'
-  gem 'pry'
 end
 
 group :development do
@@ -76,13 +74,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem "capistrano", "~> 3.4"
-  gem 'capistrano-rails'
-  gem 'capistrano-rvm'
-  gem 'capistrano-bundler'
-  gem 'capistrano-sidekiq'
-  gem 'capistrano3-puma'
-  gem 'capistrano-faster-assets', '~> 1.0'
 end
 
 group :test do
